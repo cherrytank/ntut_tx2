@@ -6,18 +6,6 @@
 3. AI 物件偵測
 4. 偵測到 person 時 LED 亮
 
-## 課程流程
-
-```text
-0:00-0:10  git pull、說明安裝流程
-0:10-0:35  學生安裝 jetson-inference
-0:35-0:45  檢查環境
-0:45-1:00  GPIO LED 閃爍
-1:00-1:10  Webcam 顯示
-1:10-1:25  detectNet 物件偵測
-1:25-1:30  detectNet + GPIO、加分挑戰
-```
-
 ## 下載程式
 
 ```bash
