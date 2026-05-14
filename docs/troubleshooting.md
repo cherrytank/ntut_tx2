@@ -17,12 +17,6 @@ ls /dev/video*
 如果 camera 不是 `/dev/video0`，請修改：
 
 ```python
-INPUT = "/dev/video0"
-```
-
-或：
-
-```python
 CAMERA_ID = 0
 ```
 
@@ -32,7 +26,7 @@ CAMERA_ID = 0
 
 如果透過 SSH 操作，通常無法直接顯示 `cv2.imshow()` 視窗。
 
-## Jetson.GPIO 匯入失敗
+## OpenCV 匯入失敗
 
 執行：
 
@@ -40,70 +34,80 @@ CAMERA_ID = 0
 bash setup/check_env.sh
 ```
 
-如果看到 `Jetson.GPIO FAIL`，請確認 Jetson.GPIO 已安裝，或請老師協助檢查 JetPack 環境。
+如果看到 `OpenCV FAIL`，請確認 Jetson TX2 的 Python 環境中有安裝 OpenCV。
 
-## jetson-inference 匯入失敗
+## DNN module 顯示 False
+
+如果檢查結果是：
+
+```text
+DNN module: False
+```
+
+代表這個 OpenCV 沒有 `cv2.dnn`，無法使用 OpenCV DNN 載入 YOLO。
+
+這種情況不建議現場重編 OpenCV，請改用備案，例如 YOLOv3-tiny 或 OpenCV 顏色偵測。
+
+## 模型檔案 missing
 
 如果看到：
 
 ```text
-jetson-inference FAIL
+cfg missing
+weights missing
+names missing
 ```
 
-代表 `jetson_inference` 或 `jetson_utils` 還不能被 Python 找到。
-
-請先執行：
+請執行：
 
 ```bash
-bash setup/install_jetson_inference.sh
+bash setup/download_models.sh
 ```
 
-如果已經安裝過，可以重新進入 build 目錄安裝一次：
-
-```bash
-cd ~/jetson-inference/build
-sudo make install
-sudo ldconfig
-```
-
-然後再檢查：
+下載後再檢查：
 
 ```bash
 bash setup/check_env.sh
 ```
 
-## jetson-inference 安裝太久
+## YOLOv4-tiny load FAIL
 
-第一次 clone、下載模型、編譯 TensorRT 範例都可能需要時間。
-
-如果課堂時間有限，建議：
-
-1. 先確認每台 TX2 都能連上網路。
-2. 請學生一上課就先執行 `bash setup/install_jetson_inference.sh`。
-3. 編譯期間老師可以先講解 GPIO 接線與 detectNet 流程。
-
-## cmake 出現模型選單
-
-請至少選：
+如果錯誤訊息包含：
 
 ```text
-SSD-Mobilenet-v2
+Unsupported activation
+Parsing error
+readNetFromDarknet failed
 ```
 
-如果選單中還有其他模型，課堂中可以先不用勾選，避免下載時間太長。
+可能是 TX2 上的 OpenCV 版本太舊，讀不了 YOLOv4-tiny 的 Darknet config。
 
-## detectNet 第一次啟動很慢
+課堂上不要現場重編 OpenCV，直接切到備案比較穩。
 
-第一次啟動模型時，TensorRT 可能需要建立最佳化 engine，所以會比較久。
+## 如果 TX2 跑太慢
 
-同一台機器之後再次執行通常會快很多。
+把程式中的：
+
+```python
+INPUT_WIDTH = 416
+INPUT_HEIGHT = 416
+```
+
+改成：
+
+```python
+INPUT_WIDTH = 320
+INPUT_HEIGHT = 320
+```
+
+速度會好一點，但準確率會下降。
 
 ## 沒有偵測到 person
 
 可以先調低信心門檻：
 
 ```python
-THRESHOLD = 0.3
+CONF_THRESHOLD = 0.3
 ```
 
 也可以確認：
@@ -111,13 +115,14 @@ THRESHOLD = 0.3
 1. 人是否在鏡頭畫面中。
 2. 光線是否足夠。
 3. Webcam 是否對焦正常。
+4. `models/coco.names` 裡的類別名稱是否是 `person`。
 
 ## LED 一直亮或一直不亮
 
 請確認：
 
 1. `TARGET_CLASS = "person"` 是否拼字正確。
-2. terminal 是否有印出 `person`。
+2. terminal 或畫面是否有出現 `person`。
 3. LED 腳位是否接在 Pin 12。
 4. GND 是否接好。
 
@@ -127,4 +132,4 @@ THRESHOLD = 0.3
 bash run_gpio.sh
 ```
 
-確認 LED 硬體接線沒問題，再回到 AI + GPIO 程式。
+確認 LED 硬體接線沒問題，再回到 YOLO + GPIO 程式。
