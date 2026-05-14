@@ -39,6 +39,7 @@ try:
     print("jetson-inference OK")
 except Exception as e:
     print("jetson-inference FAIL:", e)
+    print("Run: bash setup/install_jetson_inference.sh")
 EOF
 
 echo ""

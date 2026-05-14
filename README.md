@@ -10,32 +10,13 @@
 ## 課程流程
 
 ```text
-0:00-0:10  git pull、檢查環境
-0:10-0:30  GPIO LED 閃爍
-0:30-0:45  Webcam 顯示
-0:45-1:10  detectNet 物件偵測
-1:10-1:30  detectNet + GPIO、加分挑戰
-```
-
-## 課前準備
-
-老師需先在每台 Jetson TX2 安裝好 NVIDIA `jetson-inference`：
-
-```bash
-git clone --recursive https://github.com/dusty-nv/jetson-inference
-cd jetson-inference
-mkdir build
-cd build
-cmake ../
-make -j$(nproc)
-sudo make install
-sudo ldconfig
-```
-
-如果安裝過程出現模型選單，建議至少選：
-
-```text
-SSD-Mobilenet-v2
+0:00-0:10  git pull、說明安裝流程
+0:10-0:35  學生安裝 jetson-inference
+0:35-0:45  檢查環境
+0:45-1:00  GPIO LED 閃爍
+1:00-1:10  Webcam 顯示
+1:10-1:25  detectNet 物件偵測
+1:25-1:30  detectNet + GPIO、加分挑戰
 ```
 
 ## 下載程式
@@ -45,6 +26,26 @@ git clone <你的 repo>
 cd tx2-detectnet-lab
 git pull
 ```
+
+## 安裝 jetson-inference
+
+學生在自己的 Jetson TX2 上執行：
+
+```bash
+bash setup/install_jetson_inference.sh
+```
+
+安裝需要網路，也可能需要輸入 Jetson 的 sudo 密碼。
+
+如果安裝過程出現模型選單，至少選：
+
+```text
+SSD-Mobilenet-v2
+```
+
+這個模型適合教學，辨識類別包含 `person`、`bottle`、`chair` 等常見物件。
+
+注意：第一次安裝和編譯會花比較久。若網路或 TX2 速度較慢，建議老師先讓學生在課前或上課一開始執行安裝。
 
 ## 檢查環境
 

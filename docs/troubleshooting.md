@@ -52,13 +52,45 @@ jetson-inference FAIL
 
 代表 `jetson_inference` 或 `jetson_utils` 還不能被 Python 找到。
 
-請老師先確認每台 TX2 已完成：
+請先執行：
 
 ```bash
-cd jetson-inference/build
+bash setup/install_jetson_inference.sh
+```
+
+如果已經安裝過，可以重新進入 build 目錄安裝一次：
+
+```bash
+cd ~/jetson-inference/build
 sudo make install
 sudo ldconfig
 ```
+
+然後再檢查：
+
+```bash
+bash setup/check_env.sh
+```
+
+## jetson-inference 安裝太久
+
+第一次 clone、下載模型、編譯 TensorRT 範例都可能需要時間。
+
+如果課堂時間有限，建議：
+
+1. 先確認每台 TX2 都能連上網路。
+2. 請學生一上課就先執行 `bash setup/install_jetson_inference.sh`。
+3. 編譯期間老師可以先講解 GPIO 接線與 detectNet 流程。
+
+## cmake 出現模型選單
+
+請至少選：
+
+```text
+SSD-Mobilenet-v2
+```
+
+如果選單中還有其他模型，課堂中可以先不用勾選，避免下載時間太長。
 
 ## detectNet 第一次啟動很慢
 
