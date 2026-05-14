@@ -1,7 +1,6 @@
 # Jetson TX2 detectNet Lab
 
-本課程使用 Jetson TX2 完成：
-
+使用 Jetson TX2 完成：
 1. GPIO LED 控制
 2. Webcam 即時影像
 3. AI 物件偵測
@@ -22,14 +21,12 @@
 ## 下載程式
 
 ```bash
-git clone <你的 repo>
-cd tx2-detectnet-lab
-git pull
+git clone https://github.com/cherrytank/ntut_tx2.git
+
 ```
 
 ## 安裝 jetson-inference
 
-學生在自己的 Jetson TX2 上執行：
 
 ```bash
 bash setup/install_jetson_inference.sh
@@ -42,10 +39,6 @@ bash setup/install_jetson_inference.sh
 ```text
 SSD-Mobilenet-v2
 ```
-
-這個模型適合教學，辨識類別包含 `person`、`bottle`、`chair` 等常見物件。
-
-注意：第一次安裝和編譯會花比較久。若網路或 TX2 速度較慢，建議老師先讓學生在課前或上課一開始執行安裝。
 
 ## 檢查環境
 
@@ -81,9 +74,8 @@ bash run_detectnet_gpio.sh
 
 在視窗中按 `q`，或在 terminal 按 `Ctrl + C`。
 
-## 學生任務
+## 任務
 
-必做：
 
 ```text
 任務 1：讓 LED 閃爍
@@ -92,7 +84,6 @@ bash run_detectnet_gpio.sh
 任務 4：讓模型偵測 person
 ```
 
-加分：
 
 ```text
 任務 5：把 THRESHOLD 從 0.5 改成 0.7
