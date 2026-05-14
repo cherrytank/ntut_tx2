@@ -11,8 +11,8 @@ CLASS_NAMES = "models/coco.names"
 CAMERA_ID = 0
 CONF_THRESHOLD = 0.5
 NMS_THRESHOLD = 0.4
-INPUT_WIDTH = 416
-INPUT_HEIGHT = 416
+INPUT_WIDTH = 320
+INPUT_HEIGHT = 320
 
 
 def get_output_layers(net):

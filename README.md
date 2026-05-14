@@ -7,18 +7,6 @@
 3. OpenCV DNN + YOLOv4-tiny 物件偵測
 4. 偵測到 person 時 LED 亮
 
-
-## 課程流程
-
-```text
-0:00-0:10  git pull、下載 YOLOv4-tiny 模型
-0:10-0:20  檢查環境
-0:20-0:40  GPIO LED 閃爍
-0:40-0:55  Webcam 顯示
-0:55-1:15  YOLOv4-tiny 物件偵測
-1:15-1:30  YOLOv4-tiny + GPIO、加分挑戰
-```
-
 ## 下載程式
 
 ```bash
@@ -29,14 +17,6 @@ git clone https://github.com/cherrytank/ntut_tx2.git
 
 ```bash
 bash setup/download_models.sh
-```
-
-下載後 `models/` 內應該會有：
-
-```text
-yolov4-tiny.cfg
-yolov4-tiny.weights
-coco.names
 ```
 
 ## 檢查環境
@@ -55,18 +35,6 @@ bash run_gpio.sh
 
 ```bash
 bash run_webcam.sh
-```
-
-## YOLOv4-tiny 圖片偵測
-
-```bash
-bash run_yolo_image.sh path/to/image.jpg
-```
-
-偵測結果會存到：
-
-```text
-outputs/yolov4_tiny_result.jpg
 ```
 
 ## YOLOv4-tiny Webcam 偵測
@@ -93,13 +61,6 @@ bash run_yolo_gpio.sh
 任務 3：開啟 Webcam
 任務 4：跑出 YOLOv4-tiny 物件偵測畫面
 任務 5：讓模型偵測 person
-```
-
-```text
-任務 6：把 CONF_THRESHOLD 從 0.5 改成 0.7
-任務 7：把 TARGET_CLASS 改成 bottle
-任務 8：偵測到 person 時 LED 亮
-任務 9：如果 TX2 跑太慢，把 INPUT_WIDTH / INPUT_HEIGHT 改成 320
 ```
 
 ## 硬體接線
